@@ -1,24 +1,27 @@
-<% if @weather['cod'] == '404' %>
-  document.querySelector(".error").style.display = "block";
-  document.querySelector(".weather").style.display = "none";
+<% if @weather.present? %>
+  <% if @weather['cod'].to_s == '404' %>
+    document.querySelector(".error").style.display = "block";
+    document.querySelector(".weather").style.display = "none";
+  <% else %>
+    document.getElementById("cityName").textContent = "<%= j @weather['name'] %>";
+    document.getElementById("temp").textContent = "<%= @weather.dig('main', 'temp') || '--' %>°C";
+    document.getElementById("mintemp").textContent = "<%= @weather.dig('main', 'temp_min') || '--' %>°C";
+    document.getElementById("maxtemp").textContent = "<%= @weather.dig('main', 'temp_max') || '--' %>°C";
+    document.getElementById("humidity").textContent = "<%= @weather.dig('main', 'humidity') || '--' %>%";
+    document.getElementById("wind").textContent = "<%= @weather.dig('wind', 'speed') || '--' %> km/h";
+
+    <% icon = case @weather.dig('weather', 0, 'main')
+             when 'Clouds' then 'clouds.png'
+             when 'Clear'  then 'clear.png'
+             when 'Rain', 'Drizzle' then 'rain.png'
+             when 'Mist'   then 'mist.png'
+             else 'default.png'
+             end %>
+
+    document.querySelector(".weather-icon").src = "assets/<%= icon %>";
+    document.querySelector(".error").style.display = "none";
+    document.querySelector(".weather").style.display = "block";
+  <% end %>
 <% else %>
-  document.getElementById("cityName").textContent = "<%= j @weather['name'] %>";
-  document.getElementById("temp").textContent = "<%= @weather['main']['temp'] %>°C";
-  document.getElementById("mintemp").textContent = "<%= @weather['main']['temp_min'] %>°C";
-  document.getElementById("maxtemp").textContent = "<%= @weather['main']['temp_max'] %>°C";
-  document.getElementById("humidity").textContent = "<%= @weather['main']['humidity'] %>%";
-  document.getElementById("wind").textContent = "<%= @weather['wind']['speed'] %> km/h";
-
-  <% icon = case @weather['weather'][0]['main']
-           when 'Clouds' then 'clouds.png'
-           when 'Clear'  then 'clear.png'
-           when 'Rain', 'Drizzle' then 'rain.png'
-           when 'Mist'   then 'mist.png'
-           else 'default.png'
-           end %>
-
-  document.querySelector(".weather-icon").src = "assets/<%= icon %>";
-
-  document.querySelector(".error").style.display = "none";
-  document.querySelector(".weather").style.display = "block";
+  alert(" Weather data not available.");
 <% end %>
