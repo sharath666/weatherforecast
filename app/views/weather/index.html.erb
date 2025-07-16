@@ -1,7 +1,7 @@
 <div class="card">
 <%= form_tag(fetch_weather_path, method: :get, remote: true, id: 'weatherForm') do %>
   <div class="search">
-    <%= text_field_tag :city, nil, placeholder: 'Enter city name', id: 'cityInput', spellcheck: false %>
+    <%= text_field_tag :city, nil, placeholder: 'Enter city name or the zipcode', id: 'cityInput', spellcheck: false %>
     <button type="submit"><%=image_tag 'search.png' %></button>
   </div>
 <% end %>
