@@ -1,4 +1,4 @@
-<% if @weather['cod'] == '404' && @weather["main"].present? %>
+<% if @weather['cod'] == '404' %>
   document.querySelector(".error").style.display = "block";
   document.querySelector(".weather").style.display = "none";
 <% else %>

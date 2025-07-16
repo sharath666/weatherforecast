@@ -3,9 +3,12 @@ class WeatherController < ApplicationController
   require 'json'
 
   def index
+    # landing page 
   end
 
+  # this method will call the weather api
   def fetch_weather
+
     city = params[:city]
     api_key = ENV['WEATHER_API_KEY']
     base_url = ENV['WEATHER_API_URL']
