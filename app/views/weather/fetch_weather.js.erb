@@ -4,6 +4,8 @@
 <% else %>
   document.getElementById("cityName").textContent = "<%= j @weather['name'] %>";
   document.getElementById("temp").textContent = "<%= @weather['main']['temp'] %>°C";
+  document.getElementById("mintemp").textContent = "<%= @weather['main']['temp_min'] %>°C";
+  document.getElementById("maxtemp").textContent = "<%= @weather['main']['temp_max'] %>°C";
   document.getElementById("humidity").textContent = "<%= @weather['main']['humidity'] %>%";
   document.getElementById("wind").textContent = "<%= @weather['wind']['speed'] %> km/h";
 
