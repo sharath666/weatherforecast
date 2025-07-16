@@ -11,12 +11,18 @@ class WeatherController < ApplicationController
 
   def fetch_weather
     city = params[:city]
+    return render js: "alert('Please enter a ZIP code');" if city.blank?
     api_key = ENV['WEATHER_API_KEY']
     base_url = ENV['WEATHER_API_URL']
     url = "#{base_url}?q=#{city}&units=metric&appid=#{api_key}"
-    response = HTTParty.get(url)
- @weather = JSON.parse(response.body)
-     respond_to do |format|
+    cache_key = "weather_forecast_#{city}"
+    @cached = true
+    @weather = Rails.cache.fetch(cache_key, expires_in: 30.minutes) do
+      @cached = false
+      response = HTTParty.get(url)
+      JSON.parse(response.body)
+    end
+    respond_to do |format|
       format.js
     end
   end

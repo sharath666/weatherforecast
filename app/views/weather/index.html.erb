@@ -7,8 +7,11 @@
 <% end %>
 
 <div class="error" style="display: none;">
-  <h4>Invalid City Name or zipcode</h4>
+  <h4 style="color:red">Invalid City Name or zipcode</h4>
 </div>
+
+<h4 id="cacheStatus" style="font-size: 14px; color: white;"></h4>
+
 
 <div class="weather" style="display: none;">
 <%= image_tag 'rain.png', class: 'weather-icon', id: 'weatherIcon' %>

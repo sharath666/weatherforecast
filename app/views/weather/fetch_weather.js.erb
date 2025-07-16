@@ -21,6 +21,7 @@
     document.querySelector(".weather-icon").src = "assets/<%= icon %>";
     document.querySelector(".error").style.display = "none";
     document.querySelector(".weather").style.display = "block";
+      document.getElementById("cacheStatus").textContent = "<%= @cached ? '🔁 Cached data (valid for 30 minutes)' : '📡 Live data from API' %>";
   <% end %>
 <% else %>
   alert(" Weather data not available.");
