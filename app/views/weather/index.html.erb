@@ -1,0 +1,34 @@
+<div class="card">
+<%= form_tag(fetch_weather_path, method: :get, remote: true, id: 'weatherForm') do %>
+  <div class="search">
+    <%= text_field_tag :city, nil, placeholder: 'Enter city name', id: 'cityInput', spellcheck: false %>
+    <button type="submit"><%=image_tag 'search.png' %></button>
+  </div>
+<% end %>
+
+<div class="error" style="display: none;">
+  <h4>Invalid City Name</h4>
+</div>
+
+<div class="weather" style="display: none;">
+<%= image_tag 'rain.png', class: 'weather-icon', id: 'weatherIcon' %>
+  <h1 class="temp" id="temp">--°C</h1>
+  <h2 class="city" id="cityName">--</h2>
+  <div class="details">
+    <div class="col">
+            <%= image_tag 'humidity.png' %>
+
+      <div>
+        <p class="humidity" id="humidity">--%</p>
+        <p>Humidity</p>
+      </div>
+    </div>
+    <div class="col">
+      <div>
+        <p class="wind" id="wind">-- km/h</p>
+        <p>Wind Speed</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

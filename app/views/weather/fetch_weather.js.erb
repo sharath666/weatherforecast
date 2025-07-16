@@ -1,0 +1,22 @@
+<% if @weather['cod'] == '404' && @weather["main"].present? %>
+  document.querySelector(".error").style.display = "block";
+  document.querySelector(".weather").style.display = "none";
+<% else %>
+  document.getElementById("cityName").textContent = "<%= j @weather['name'] %>";
+  document.getElementById("temp").textContent = "<%= @weather['main']['temp'] %>°C";
+  document.getElementById("humidity").textContent = "<%= @weather['main']['humidity'] %>%";
+  document.getElementById("wind").textContent = "<%= @weather['wind']['speed'] %> km/h";
+
+  <% icon = case @weather['weather'][0]['main']
+           when 'Clouds' then 'clouds.png'
+           when 'Clear'  then 'clear.png'
+           when 'Rain', 'Drizzle' then 'rain.png'
+           when 'Mist'   then 'mist.png'
+           else 'default.png'
+           end %>
+
+  document.querySelector(".weather-icon").src = "assets/<%= icon %>";
+
+  document.querySelector(".error").style.display = "none";
+  document.querySelector(".weather").style.display = "block";
+<% end %>
